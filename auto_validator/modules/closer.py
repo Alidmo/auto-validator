@@ -46,6 +46,11 @@ class CloserModule:
         if not state.strategist_output:
             raise ValueError("Module A must run before generating a launch sequence.")
 
+        # Generate thank-you email first if not already done
+        if state.closer_output is None:
+            thank_you = self.generate_thank_you(project_id)
+            state = self._state.load(project_id)  # reload after save
+
         console.print(f"\n[bold blue]Closer:[/bold blue] Generating PLF launch sequence...")
         s = state.strategist_output
         system, user = load_prompt(
@@ -60,14 +65,8 @@ class CloserModule:
         )
         plf = self._llm.complete(system, user, PLFSequence)
 
-        if state.closer_output is None:
-            # Generate thank-you email if not already done
-            thank_you = self.generate_thank_you(project_id)
-            state = self._state.load(project_id)  # reload after save
-            state.closer_output = CloserOutput(thank_you_email=thank_you, plf_sequence=plf, launch_approved=True)
-        else:
-            state.closer_output.plf_sequence = plf
-            state.closer_output.launch_approved = True
+        state.closer_output.plf_sequence = plf
+        state.closer_output.launch_approved = True
 
         self._state.save(state)
         return plf
