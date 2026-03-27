@@ -57,7 +57,7 @@ def make_sequence(*responses):
     call_count = [0]
 
     def side_effect(system, user, temperature=0.7):
-        idx = min(call_count[0], len(items) - 1)
+        idx = call_count[0] % len(items)
         call_count[0] += 1
         return json.dumps(items[idx])
 
