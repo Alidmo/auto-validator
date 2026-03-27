@@ -1,0 +1,77 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auto-validator"
+version = "0.1.0"
+description = "Autonomous business idea validation — from a single sentence to a fully validated marketing funnel"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "Ali" }]
+keywords = [
+    "business-validation",
+    "market-research",
+    "llm",
+    "ai-agent",
+    "startup",
+    "marketing",
+    "cli",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "openai>=1.30.0",
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "click>=8.1.7",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.3.0",
+    "supabase>=2.4.0",
+    "sendgrid>=6.11.0",
+    "google-api-python-client>=2.133.0",
+    "google-auth-httplib2>=0.2.0",
+    "google-auth-oauthlib>=1.2.0",
+    "jinja2>=3.1.4",
+    "pyyaml>=6.0.1",
+    "python-dotenv>=1.0.1",
+    "rich>=13.7.1",
+    "tenacity>=8.3.0",
+    "httpx>=0.27.0",
+    "python-multipart>=0.0.9",
+]
+
+[project.optional-dependencies]
+anthropic = ["anthropic>=0.40.0"]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-asyncio>=0.23.7",
+    "pytest-mock>=3.14.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-username/auto-validator"
+Repository = "https://github.com/your-username/auto-validator"
+Issues = "https://github.com/your-username/auto-validator/issues"
+
+[project.scripts]
+auto-validator = "auto_validator.cli.main:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["auto_validator*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

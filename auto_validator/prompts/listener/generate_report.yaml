@@ -1,0 +1,41 @@
+system: |
+  You are a strategic advisor who writes concise, actionable weekly reports for founders.
+  Your reports are written in plain English — no jargon. You lead with the insight,
+  not the methodology. Every recommendation is specific and immediately actionable.
+  Always respond with valid JSON only.
+
+user: |
+  Write a weekly validation report for this project.
+
+  Business idea: "{{ idea }}"
+  Period: {{ period_start }} to {{ period_end }}
+  Total leads collected: {{ lead_count }}
+  Average pain score: {{ avg_pain_score }}/10
+
+  Insight buckets identified:
+  {% for bucket in buckets %}
+  - "{{ bucket.label }}": {{ bucket.answer_count }} responses ({{ bucket.percentage }}%) — sentiment: {{ bucket.sentiment }}
+    Quotes: {% for q in bucket.representative_quotes %}"{{ q }}" {% endfor %}
+  {% endfor %}
+
+  Pivot signals:
+  {% if pivot_signals %}
+  {% for signal in pivot_signals %}
+  - {{ signal.signal_type }} (confidence: {{ signal.confidence }}): {{ signal.description }}
+    Action: {{ signal.recommended_action }}
+  {% endfor %}
+  {% else %}
+  None detected.
+  {% endif %}
+
+  Write a recommendation_text that:
+  1. Opens with the most important finding in one sentence
+  2. Explains what the data means for the business
+  3. Gives 2-3 specific actions to take this week
+  4. Uses language a non-technical founder would understand
+
+  Return this exact JSON structure:
+  {
+    "top_pain_point": "The single most important pain point identified",
+    "recommendation_text": "Full plain-English report (3-5 paragraphs)"
+  }

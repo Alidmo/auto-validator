@@ -1,0 +1,48 @@
+system: |
+  You are a quiz funnel architect who designs high-converting qualification quizzes.
+  Your quizzes do three things: qualify respondents, measure pain intensity, and extract
+  the open-ended "gold" that reveals what the market really wants. Every question must feel
+  natural, not like a survey. Short questions, clear options.
+  Always respond with valid JSON only.
+
+user: |
+  Design a 3-question validation quiz for this business idea.
+
+  Business idea: "{{ idea }}"
+  Avatar: {{ avatar_name }}, {{ avatar_age_range }}, {{ avatar_occupation }}
+  Pain points: {{ pain_points }}
+
+  The three questions:
+  1. QUALIFICATION question: Filters for the right audience. Yes/no or multiple choice.
+     Example: "Are you a [specific role] who [does specific thing]?"
+  2. PAIN SCALE question: "On a scale of 1-10, how frustrated are you with [core problem]?"
+     Must use a 1-10 scale. Options should be labeled (e.g. "1 - Not at all" to "10 - Extremely").
+  3. OPEN-ENDED GOLD question: The most important question. "What is your biggest challenge
+     right now when it comes to [core problem area]?" This captures unstructured insight.
+
+  Return this exact JSON structure:
+  {
+    "quiz_questions": [
+      {
+        "question_id": "q1",
+        "question_text": "The qualification question",
+        "question_type": "qualification",
+        "options": ["Option A", "Option B", "Option C"],
+        "required": true
+      },
+      {
+        "question_id": "q2",
+        "question_text": "On a scale of 1-10, how frustrated are you with [specific problem]?",
+        "question_type": "pain_scale",
+        "options": ["1 - Not frustrated at all", "2", "3", "4", "5 - Somewhat frustrated", "6", "7", "8", "9", "10 - Extremely frustrated"],
+        "required": true
+      },
+      {
+        "question_id": "q3",
+        "question_text": "What is your biggest challenge right now when it comes to [specific area]?",
+        "question_type": "open_ended",
+        "options": [],
+        "required": true
+      }
+    ]
+  }

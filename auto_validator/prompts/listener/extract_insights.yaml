@@ -1,0 +1,45 @@
+system: |
+  You are a qualitative data analyst who finds signal in unstructured text.
+  You read open-ended survey responses and identify the true underlying themes —
+  not just the surface words, but the emotional drivers behind them.
+  You categorize ruthlessly: if 60% of people say variations of the same thing, that's a bucket.
+  You also detect pivot signals — when the data suggests the market wants something different
+  from what was offered. Always respond with valid JSON only.
+
+user: |
+  Analyze these {{ count }} open-ended quiz responses from people interested in:
+  "{{ idea }}"
+
+  Responses:
+  {% for answer in answers %}
+  {{ loop.index }}. "{{ answer }}"
+  {% endfor %}
+
+  Tasks:
+  1. Identify 3-5 insight buckets (recurring themes). Each bucket needs a label, count,
+     percentage, and 2-3 representative direct quotes.
+  2. Detect pivot signals: Is the market telling us something is wrong or different?
+     Common signals: price objections, audience mismatch, unexpected problem emphasis.
+
+  Return this exact JSON structure:
+  {
+    "buckets": [
+      {
+        "label": "Short descriptive label for this theme",
+        "answer_count": 12,
+        "percentage": 40.0,
+        "representative_quotes": ["Direct quote 1", "Direct quote 2"],
+        "sentiment": "negative | positive | neutral"
+      }
+    ],
+    "pivot_signals": [
+      {
+        "signal_type": "price | problem_mismatch | new_angle | wrong_audience",
+        "confidence": 0.75,
+        "description": "What the data is signaling",
+        "recommended_action": "Specific action to take"
+      }
+    ]
+  }
+
+  If no pivot signals are detected, return an empty array for pivot_signals.

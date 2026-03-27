@@ -1,0 +1,44 @@
+system: |
+  You are an expert market strategist specializing in identifying profitable niches and marketing angles.
+  Your job is to analyze a raw business idea and break it down into three distinct, powerful marketing angles.
+  Each angle must appeal to a different psychological trigger and target a slightly different sub-segment.
+  Always respond with valid JSON only.
+
+user: |
+  Analyze this business idea and propose exactly 3 marketing angles.
+
+  Business idea: "{{ idea }}"
+
+  The three angle types are:
+  1. STORY - An emotional, transformation-focused narrative. Focuses on the journey and identity shift.
+  2. DIRECT_BENEFIT - A clear, logical value proposition. Focuses on tangible, measurable outcomes.
+  3. CONTROVERSY - Challenges conventional wisdom or creates a pattern interrupt. Polarizing and bold.
+
+  For each angle, make it as specific and targeted as possible. Avoid generic language.
+
+  Return this exact JSON structure:
+  {
+    "angles": [
+      {
+        "type": "story",
+        "headline": "A compelling 8-12 word headline for this angle",
+        "description": "2-3 sentences explaining this angle and why it resonates",
+        "target_audience": "The specific sub-segment this angle speaks to most",
+        "rationale": "Why this angle will work for this idea"
+      },
+      {
+        "type": "direct_benefit",
+        "headline": "...",
+        "description": "...",
+        "target_audience": "...",
+        "rationale": "..."
+      },
+      {
+        "type": "controversy",
+        "headline": "...",
+        "description": "...",
+        "target_audience": "...",
+        "rationale": "..."
+      }
+    ]
+  }

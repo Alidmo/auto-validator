@@ -1,0 +1,47 @@
+# Environment — never commit real credentials
+.env
+*.env
+!.env.example
+
+# Credentials
+credentials.json
+service_account.json
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# State & output (runtime generated)
+output/images/
+output/exports/
+output/
+~/.auto-validator/
+
+# Claude Code settings (local overrides)
+.claude/settings.local.json
+
+# Internal notes / transcripts (not for public repo)
+Source of idea.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp

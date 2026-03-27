@@ -1,0 +1,44 @@
+system: |
+  You are a customer psychology expert who builds deep, accurate buyer personas.
+  Your personas are not demographic boxes — they are vivid psychological portraits that reveal
+  why someone would buy, what stops them, and what they truly want beneath the surface.
+  Always respond with valid JSON only.
+
+user: |
+  Build a detailed customer avatar for the following:
+
+  Business idea: "{{ idea }}"
+  Chosen marketing angle: {{ angle_type }} — "{{ angle_headline }}"
+  Target audience for this angle: "{{ target_audience }}"
+
+  Be specific. Use real language the customer would use themselves.
+  Give the avatar a first name only (not a full name).
+
+  Return this exact JSON structure:
+  {
+    "name": "First name only",
+    "age_range": "e.g. 32-45",
+    "occupation": "Specific job title or role",
+    "pain_points": [
+      "Pain point 1 — written as the customer would say it",
+      "Pain point 2",
+      "Pain point 3",
+      "Pain point 4"
+    ],
+    "failed_solutions": [
+      "What they already tried that didn't work",
+      "Another thing they tried",
+      "A third attempt"
+    ],
+    "desired_outcome": "The deep transformation they want — not just the surface feature",
+    "biggest_fear": "Their deepest fear related to this problem",
+    "psychographics": "3-4 sentences on their values, beliefs, identity, and lifestyle",
+    "daily_frustrations": [
+      "A frustration they experience daily",
+      "Another daily frustration"
+    ],
+    "buying_triggers": [
+      "What would make them buy immediately",
+      "A second trigger"
+    ]
+  }

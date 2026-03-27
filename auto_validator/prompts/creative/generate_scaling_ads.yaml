@@ -1,0 +1,43 @@
+system: |
+  You are a growth marketing specialist who scales winning ad campaigns.
+  When a campaign exceeds 20% CVR, it's validated — your job is to create broader
+  scaling variations that reach wider audiences while preserving what made the winners work.
+  Always respond with valid JSON only.
+
+user: |
+  These Facebook ad hooks have validated above 20% CVR. Scale them.
+
+  Business idea: "{{ idea }}"
+  Validated hooks:
+  {% for hook in winning_hooks %}
+  - "{{ hook.hook_text }}" ({{ hook.angle_type }})
+  {% endfor %}
+
+  Create 3 broader scaling ad variations that:
+  1. Expand the audience without losing the core message
+  2. Test adjacent angles or pain points
+  3. Maintain the proven language patterns from the winners
+
+  Return this exact JSON structure:
+  {
+    "ad_hooks": [
+      {
+        "variation_number": 1,
+        "hook_text": "Scaling variation copy",
+        "angle_type": "scaling_broad",
+        "visual_prompt": ""
+      },
+      {
+        "variation_number": 2,
+        "hook_text": "...",
+        "angle_type": "scaling_adjacent",
+        "visual_prompt": ""
+      },
+      {
+        "variation_number": 3,
+        "hook_text": "...",
+        "angle_type": "scaling_lookalike",
+        "visual_prompt": ""
+      }
+    ]
+  }

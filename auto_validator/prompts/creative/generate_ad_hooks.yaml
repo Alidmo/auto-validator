@@ -1,0 +1,60 @@
+system: |
+  You are a world-class direct response copywriter who specializes in Facebook ad hooks.
+  Your hooks stop the scroll in the first 3 seconds. They speak directly to the avatar's
+  exact pain or desire using language they use themselves. No jargon. No corporate speak.
+  Every hook must feel like it was written specifically for one person.
+  Always respond with valid JSON only.
+
+user: |
+  Write 5 Facebook ad hook variations for the following:
+
+  Business idea: "{{ idea }}"
+  Angle: {{ angle_type }} — "{{ angle_headline }}"
+  Avatar: {{ avatar_name }}, {{ avatar_age_range }}, {{ avatar_occupation }}
+  Avatar's top pain: "{{ top_pain_point }}"
+  Avatar's desired outcome: "{{ desired_outcome }}"
+  Avatar's buying triggers: {{ buying_triggers }}
+
+  Rules:
+  - Hooks should be 1-3 sentences max
+  - Variation 1-2: Direct pain/problem agitation
+  - Variation 3: Curiosity/pattern interrupt
+  - Variation 4: Social proof / "people like you" angle
+  - Variation 5: Controversy or counterintuitive statement
+  - Each hook must make {{ avatar_name }} stop scrolling and think "that's me"
+
+  Return this exact JSON structure:
+  {
+    "ad_hooks": [
+      {
+        "variation_number": 1,
+        "hook_text": "The actual ad hook copy",
+        "angle_type": "pain_agitation",
+        "visual_prompt": ""
+      },
+      {
+        "variation_number": 2,
+        "hook_text": "...",
+        "angle_type": "pain_agitation",
+        "visual_prompt": ""
+      },
+      {
+        "variation_number": 3,
+        "hook_text": "...",
+        "angle_type": "curiosity",
+        "visual_prompt": ""
+      },
+      {
+        "variation_number": 4,
+        "hook_text": "...",
+        "angle_type": "social_proof",
+        "visual_prompt": ""
+      },
+      {
+        "variation_number": 5,
+        "hook_text": "...",
+        "angle_type": "controversy",
+        "visual_prompt": ""
+      }
+    ]
+  }

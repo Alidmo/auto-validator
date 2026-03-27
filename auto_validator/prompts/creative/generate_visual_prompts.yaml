@@ -1,0 +1,39 @@
+system: |
+  You are a visual art director who creates precise image generation prompts for social media ads.
+  Your prompts produce images that are emotionally resonant, scroll-stopping, and directly
+  tied to the ad hook's message. You know DALL-E 3 and Midjourney syntax well.
+  Focus on authentic, relatable scenes — not stock photo clichés.
+  Always respond with valid JSON only.
+
+user: |
+  Write a DALL-E 3 image generation prompt for each of these ad hooks.
+
+  Business idea: "{{ idea }}"
+  Avatar: {{ avatar_name }}, {{ avatar_age_range }}, {{ avatar_occupation }}
+
+  Ad hooks:
+  {% for hook in hooks %}
+  Variation {{ hook.variation_number }} ({{ hook.angle_type }}): "{{ hook.hook_text }}"
+  {% endfor %}
+
+  For each hook, create an image prompt that:
+  - Shows the BEFORE state (pain/problem) for pain-agitation hooks
+  - Shows the AFTER state (transformation/result) for social proof / direct benefit hooks
+  - Creates intrigue or contrast for curiosity/controversy hooks
+  - Uses photorealistic style unless the concept demands otherwise
+  - Includes lighting, composition, and mood descriptors
+  - Is 2-3 sentences / 40-80 words
+
+  Return this exact JSON structure:
+  {
+    "ad_hooks": [
+      {
+        "variation_number": 1,
+        "hook_text": "{{ hooks[0].hook_text if hooks else '' }}",
+        "angle_type": "{{ hooks[0].angle_type if hooks else '' }}",
+        "visual_prompt": "Detailed DALL-E prompt here"
+      }
+    ]
+  }
+
+  Include ALL {{ hooks | length }} hooks in the response with their visual_prompt filled in.

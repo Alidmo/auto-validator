@@ -1,0 +1,81 @@
+Project Name: Auto-Validator (Based on the Discovery Quiz Framework)
+1. High-Level Architecture
+The system utilizes n8n as the orchestrator. It connects to a single LLM Node (OpenAI GPT-4o or a local Llama 3 via Ollama) which acts as the "Decision Maker."
+Input: A raw, one-sentence business idea (e.g., "A productivity app for kindergarten teachers").
+Processing: n8n chains LLM prompts to expand, critique, and generate assets.
+Output: A fully drafted funnel (Ad copy, Images, Landing Page Copy, Quiz Logic, Email Sequence).
+Feedback Loop: The system ingests data (quiz answers), analyzes them, and suggests pivots.
+2. Roadmap & Modules
+Module A: The Strategist (Hypothesis Engine)
+Goal: Define the Avatar, Problem, and Solution based on the raw idea.
+Step 1: User inputs raw idea via a simple n8n Webhook/Form.
+Step 2: LLM Chain - Niche Down: The LLM analyzes the idea and proposes 3 specific "Angles" (as mentioned in the video: Story, Direct Benefit, Controversy).
+Step 3: LLM Chain - Avatar Creation: For the chosen angle, generate a detailed persona (Pain points, current failed solutions, desired outcome).
+Smart Decision: The LLM validates the idea against the "Timeless Equation" (People + Problem + Solution + Message). If the "Pain" score is low, it loops back and asks to refine the niche.
+Module B: The Creative Studio (Asset Generation)
+Goal: Create the tangible assets for the "Not Built Yet" funnel.
+Step 1: Ad Generation:
+LLM generates 5 variations of Facebook Ad Hooks.
+LLM generates "Visual Prompts" for Midjourney/DALL-E.
+n8n Action: Connect to OpenAI DALL-E (or Midjourney via Discord API) to generate the actual images.
+Step 2: Landing Page Builder:
+LLM writes the copy following the video's structure: Above fold (Solution) -> Problem -> Desired Outcome -> "Help us build it" CTA.
+n8n Action: Push this copy into a Google Doc (MVP) or update a CMS (WordPress/Webflow) via API to create a draft page.
+Step 3: The Quiz Architect:
+LLM generates the questions.
+Qualification: "Are you X?"
+Pain Level: "How frustrated are you (1-10)?"
+Open-ended (The Gold): "What is your biggest challenge right now?"
+n8n Action: Create a JSON structure of the quiz that can be imported into Typeform or Tally.so.
+Module C: The Listener (Data Collection & Analysis)
+Goal: The "Feedback Loop" described in the video. This is the most critical part for automation.
+Step 1: Data Ingestion:
+n8n Webhook: Listens for completed Typeform/Tally submissions.
+Step 2: Sentiment & Insight Extraction:
+The LLM reads the "Open-ended" answers.
+Smart Decision: It categorizes the answers into "Buckets."
+Example: If 60% of users say "Price is the issue," the LLM flags the current offer as "Too Expensive."
+Example: If users describe a problem you didn't think of, the LLM highlights this as a "New Pivot Angle."
+Step 3: The Report:
+n8n generates a weekly summary email to the user: "We collected 50 leads. The main pain point identified is X, not Y. Recommendation: Update the Landing Page headline."
+Module D: The Closer (Launch Sequence)
+Goal: Scale the waiting list and execute the Jeff Walker style launch.
+Step 1: Waitlist Nurture:
+LLM generates the "Thank You" email immediately upon signup.
+Step 2: The PLF (Product Launch Formula) Generator:
+Once the user clicks "Approve Launch" in n8n, the LLM generates the 4-email sequence:
+The Shot across the bow: "Something is coming" (Curiosity).
+The Why: The backstory/mission.
+The What/How: Logic and details.
+The Open Cart: Scarcity and "Buy Now."
+3. The "Smart" Logic (The LLM System Prompt)
+To minimize user interaction, you must program "Smart Decisions" into the n8n router nodes.
+The "Pivot vs. Persevere" Logic:
+Metric Check: n8n calculates the "Conversion Rate" (Leads / Clicks).
+Threshold Logic:
+*If CVR > 20%: * The LLM tags the project as "Validated." It automatically drafts the "Scaling Ads" (similar to the winners but broader).
+*If CVR < 5%: * The LLM triggers a "Refinement Protocol." It looks at the quiz drop-off rates.
+Scenario: If drop-off is at the Landing Page -> LLM rewrites the Headline.
+Scenario: If drop-off is at the Quiz -> LLM simplifies the questions.
+4. Technical Stack for the Team Lead
+Orchestration: n8n (Self-hosted or Cloud).
+Intelligence: OpenAI API (GPT-4o for logic/copy) OR LocalAI (Llama 3) for privacy/cost.
+Image Generation: OpenAI DALL-E 3 API.
+Database/Memory: Supabase or Google Sheets (to store the "State" of the project and previous LLM contexts).
+Input/Output: A simple Tally Form or n8n Form trigger for the user to start the process.
+External APIs:
+Tally.so (Quiz - excellent free API).
+Google Docs (Asset delivery).
+Gmail/SendGrid (Sending the emails).
+5. Development Phases (Sprint Plan)
+Sprint 1: The Generator (MVP)
+Build the n8n workflow that takes a text input and outputs a Google Doc containing: 3 Ad Hooks, 1 Landing Page script, and 5 Quiz questions.
+Success Metric: User inputs idea, gets a Google Doc in 2 minutes.
+Sprint 2: The Connector
+Connect the output to real tools. Push the quiz to Tally via API. Send the welcome email via Gmail node.
+Success Metric: A functional funnel is live without manual setup.
+Sprint 3: The Analyst
+Build the feedback loop. Ingest quiz data, run it through the LLM, and output a summary of findings.
+Success Metric: The system identifies the "Top Pain Point" from unstructured text data.
+6. Summary for the Team Lead
+"We are building an Autonomous Market Research Agent. It uses the video's 'Discovery Quiz' framework as its logic core. n8n will handle the API glue, while the LLM acts as the creative director and data analyst. The system will allow us to go from a 'Business Hypothesis' to a 'Data-Backed Validation Report' automatically, turning a 3-week manual process into a 10-minute automated workflow."

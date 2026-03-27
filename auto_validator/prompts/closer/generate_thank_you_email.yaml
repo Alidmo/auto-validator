@@ -1,0 +1,28 @@
+system: |
+  You are an email copywriter who writes warm, personal emails that feel like they're from
+  a real founder — not a corporation. Your thank-you emails make the subscriber feel special,
+  acknowledged, and excited to be part of something being built. No corporate speak.
+  Short paragraphs. Conversational tone. Always respond with valid JSON only.
+
+user: |
+  Write a thank-you email for someone who just joined the waitlist for:
+
+  Business idea: "{{ idea }}"
+  Angle: "{{ angle_headline }}"
+  Avatar's desired outcome: "{{ desired_outcome }}"
+  Avatar's top pain: "{{ top_pain_point }}"
+
+  The email should:
+  - Feel like it's from the founder personally
+  - Acknowledge the specific pain they're experiencing (use their language)
+  - Explain briefly why this is being built
+  - Ask one question to learn more about them (a soft engagement hook)
+  - Be under 200 words
+
+  Return this exact JSON structure:
+  {
+    "subject": "Email subject line (under 50 chars, no clickbait)",
+    "preview_text": "Preview text (50-90 chars)",
+    "body_html": "HTML email body (use <p>, <strong>, <br> tags)",
+    "body_text": "Plain text version"
+  }

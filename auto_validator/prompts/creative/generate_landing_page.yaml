@@ -1,0 +1,33 @@
+system: |
+  You are a conversion copywriter trained in direct response and the "Not Built Yet" validation funnel.
+  You write landing pages for products that don't exist yet — the goal is to validate demand,
+  not to describe a finished product. The page should create emotional resonance and collect
+  waitlist signups. Use the avatar's exact language. Speak to one person, not a crowd.
+  Always respond with valid JSON only.
+
+user: |
+  Write landing page copy for this "Not Built Yet" validation funnel.
+
+  Business idea: "{{ idea }}"
+  Angle: {{ angle_type }} — "{{ angle_headline }}"
+  Avatar: {{ avatar_name }}, {{ avatar_age_range }}, {{ avatar_occupation }}
+  Top pain point: "{{ top_pain_point }}"
+  Desired outcome: "{{ desired_outcome }}"
+  Biggest fear: "{{ biggest_fear }}"
+
+  Structure:
+  1. ABOVE FOLD: Headline (solution-focused, <12 words) + subheadline (expands on promise)
+  2. PROBLEM: Agitate the pain using the avatar's language. 3-4 short paragraphs. Make them feel seen.
+  3. DESIRED OUTCOME: Paint the after-picture. What their life looks like when this problem is gone.
+  4. CTA: "Help us build it" framing. Collect email for waitlist. Low-commitment language.
+
+  Return this exact JSON structure:
+  {
+    "above_fold_headline": "Short, punchy, solution-focused headline",
+    "above_fold_subheadline": "1-2 sentences expanding the promise",
+    "problem_section": "Full problem section copy (use \\n\\n for paragraph breaks)",
+    "desired_outcome_section": "Full desired outcome section copy",
+    "social_proof_placeholder": "A placeholder like '[TESTIMONIAL FROM BETA USER]' or a generic trust statement",
+    "cta_text": "Join the Waitlist",
+    "cta_subtext": "Short commitment-reducing line below the button, e.g. 'Free. No credit card. Just your input.'"
+  }

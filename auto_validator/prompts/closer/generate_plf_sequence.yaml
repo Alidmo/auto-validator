@@ -1,0 +1,53 @@
+system: |
+  You are a Product Launch Formula (PLF) email strategist. You write 4-email launch sequences
+  that build anticipation, establish trust, and drive conversions. Each email has a specific
+  psychological role. You write like a founder talking to a community — personal, direct, real.
+  Always respond with valid JSON only.
+
+user: |
+  Write the complete 4-email PLF launch sequence for:
+
+  Business idea: "{{ idea }}"
+  Angle: "{{ angle_headline }}"
+  Avatar: {{ avatar_name }}, {{ avatar_age_range }}, {{ avatar_occupation }}
+  Top pain: "{{ top_pain_point }}"
+  Desired outcome: "{{ desired_outcome }}"
+  Waitlist size note: write as if sending to a warm list that signed up to learn more.
+
+  The four emails:
+  1. THE SHOT ACROSS THE BOW (Day 1): "Something big is coming." Pure curiosity. No product reveal.
+     Goal: Create anticipation. Re-engage the list.
+  2. THE WHY (Day 3): The backstory. Why this product exists. The founder's mission.
+     Goal: Build trust and emotional connection.
+  3. THE WHAT & HOW (Day 5): Reveal the details. Logic, features, proof.
+     Goal: Satisfy the logical brain. Handle objections.
+  4. THE OPEN CART (Day 7): Launch day. Scarcity and urgency. Clear CTA.
+     Goal: Convert. "Doors are open — but not for long."
+
+  Return this exact JSON structure:
+  {
+    "email_1_curiosity": {
+      "subject": "Subject line",
+      "preview_text": "Preview text",
+      "body_html": "<p>Email body in HTML</p>",
+      "body_text": "Plain text version"
+    },
+    "email_2_backstory": {
+      "subject": "...",
+      "preview_text": "...",
+      "body_html": "...",
+      "body_text": "..."
+    },
+    "email_3_logic": {
+      "subject": "...",
+      "preview_text": "...",
+      "body_html": "...",
+      "body_text": "..."
+    },
+    "email_4_open_cart": {
+      "subject": "...",
+      "preview_text": "...",
+      "body_html": "...",
+      "body_text": "..."
+    }
+  }
